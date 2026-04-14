@@ -32,18 +32,28 @@ int main() {
 
          getline(cin, input);
 
-         if(input == 'add') {
+         if(input == "add") {
             //ask player what they want to add
+              for(int i = 0; i < favgames.size(); i++) {
+                 cout << favgames[i] << endl;
+            }
             cout << "Lets add another Video Game to the List.\n";
+
             //get players feedback
             getline(cin, input);
             //show player the new list
             favgames.push_back(input);
 
+            
         }
-        if(input == 'remove') {
+
+        if(input == "remove") {
             //ask player what game they want to get rid of
             cout << "what game would you like to remove from list?\n";
+            sort(favgames.begin(), favgames.end());
+            for(int i = 0; i < favgames.size(); i++) {
+                 cout << favgames[i] << endl;
+            }
 
             // gain players answer
             getline(cin, input);
@@ -56,12 +66,32 @@ int main() {
                 cout << "We've found that name. removing now.\n";
                 favgames.erase(iter);
             }
-            
 
+            cout << "here are your favorite games:\n";
+            for(int i = 0; i < favgames.size(); i++) {
+                 cout << favgames[i] << endl;
+            }
         }
 
+        if(input == "show all") {
+            //summon names of video games from list
+            vector<string> favgames;
 
+            favgames.push_back("mario");
+            favgames.push_back("pacman");
+            favgames.push_back("eldin ring");
+            // tell the player her are your games
 
+            cout << "here are your Games!\n";
+            for(int i = 0; i < favgames.size(); i++) {
+                cout << "\t" << favgames[i] << "\n";
+            }
+        }
+
+        else if(input == "quit") {
+            cout << "thanks for playing the game.\n";
+            break;
+        }
    
 
 //end of push
