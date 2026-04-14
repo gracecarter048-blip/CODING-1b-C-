@@ -15,7 +15,8 @@ using namespace std;
 int main() { //this is the beginning of the whole code
     cout << "Lets Edit your Favorite Games List!\n";
     // Give the names on list to player
-    vector<string> favgames = {"mario", "pacman", "Eldin Ring"};
+    vector<string> favgames = {"mario", "pacman", "Eldin Ring", "Need for Speed", "Mario Kart", "ghostbusters",
+    "breath of the wild", "galaga", "arkham", "fortnite", "miecraft", "roblox", "Friday The 13th"};
     string input;
 
     do{ //Ask players what they want to do
@@ -110,6 +111,16 @@ int main() { //this is the beginning of the whole code
             favgames.push_back("mario");
             favgames.push_back("pacman");
             favgames.push_back("eldin ring");
+            favgames.push_back("need for speed");
+            favgames.push_back("Mario Kart");
+            favgames.push_back("ghostbusters");
+            favgames.push_back("breath of the wild");
+            favgames.push_back("galaga");
+            favgames.push_back("arkham");
+            favgames.push_back("fortnite");
+            favgames.push_back("minecraft");
+            favgames.push_back("roblox");
+            favgames.push_back("Friday The 13th");
             // tell the player her are your games
 
             cout << "here are your Games!\n";
