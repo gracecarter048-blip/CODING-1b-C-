@@ -9,20 +9,19 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-
+//need this for the use of having names throughout the game
 using namespace std;
 
-int main() {
+int main() { //this is the beginning of the whole code
     cout << "Lets Edit your Favorite Games List!\n";
-
+    // Give the names on list to player
     vector<string> favgames = {"mario", "pacman", "Eldin Ring"};
     string input;
 
-    do{
+    do{ //Ask players what they want to do
         cout << "what would you like to do?\n";
         //create players options
         cout << "you can type 'add', 'remove', 'edit', 'show all', 'quit'.\n";
-
          getline(cin, input);
 
          if(input == "add") {
@@ -31,7 +30,6 @@ int main() {
                  cout << "\t" << favgames[i] << endl;
             }
             cout << "Lets add another Video Game to the List.\n";
-
             //get players feedback
             getline(cin, input);
             //show player the new list
@@ -51,7 +49,6 @@ int main() {
             for(int i = 0; i < favgames.size(); i++) {
                  cout << "\t" << favgames[i] << endl;
             }
-
             // gain players answer
             getline(cin, input);
 
@@ -63,7 +60,6 @@ int main() {
                 cout << "We've found that name. removing now.\n";
                 favgames.erase(iter);
             }
-
             cout << "here are your favorite games:\n";
             for(int i = 0; i < favgames.size(); i++) {
                  cout << "\t" << favgames[i] << endl;
@@ -80,31 +76,29 @@ int main() {
             }
 
             iter = favgames.begin();
-
-            cout << "iter is pointing at " << *iter << ".\n";
-
             iter += 1;
+            cout << "What game would you like to Edit?\n";
             getline(cin, input);
-
             // use the find algorithm
             iter = find(favgames.begin(), favgames.end(), input);
             if(iter != favgames.end()) {
                 cout << "We have found " << *iter << "!\n";
                 cout << "would you like to change out this Game?\n";
                 getline(cin, input);
-
+// if player says yes let them change a game
                 if (input == "yes") {
                     cout << "what would you like to chage it too?\n";
                     getline(cin, input);
 
                     *iter = input;
                 }
+                favgames.push_back(input);
                 cout << "here are your Games!\n";
             for(int i = 0; i < favgames.size(); i++) {
                 cout << "   " <<favgames[i] <<"\n";
             }
             }
-            else{
+            else{   //if wrong game gets put in take player back to menu
                 cout << "we couldn't find that name.\n";
             }
         }
@@ -112,7 +106,6 @@ int main() {
         if(input == "show all") {
             //summon names of video games from list
             vector<string> favgames;
-
 
             favgames.push_back("mario");
             favgames.push_back("pacman");
@@ -125,11 +118,10 @@ int main() {
             }
         }
 
-        else if(input == "quit") {
+        else if(input == "quit") {  //if player types quit they end the game
             cout << "thanks for playing the game.\n";
             break;
         }
-   
 
 //end of push
     } while(true);
