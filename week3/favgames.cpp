@@ -37,6 +37,10 @@ int main() {
             //show player the new list
             favgames.push_back(input);
 
+            cout << "here are your favorite games:\n";
+            for(int i = 0; i < favgames.size(); i++) {
+                 cout << "\t" << favgames[i] << endl;
+            }
             
         }
 
@@ -66,23 +70,21 @@ int main() {
             }
         }
 
-        if(input == "edit") {
+        else if(input == "edit") {
+            vector<string> favgames = 
+            {"mario", "eldin ring", "pacman"};
             vector<string>::iterator iter;
-            cout << "here are your favs!\n";
+            cout << "here are your favorite games!\n";
             for(int i = 0; i < favgames.size(); i++) {
                 cout << "   " <<favgames[i] <<"\n";
             }
-
-            cout << "What Game would you like to Select?\n";
-            getline(cin, input);
 
             iter = favgames.begin();
 
             cout << "iter is pointing at " << *iter << ".\n";
 
             iter += 1;
-
-            cout << "now iter is pointing at " << *iter << ".\n";
+            getline(cin, input);
 
             // use the find algorithm
             iter = find(favgames.begin(), favgames.end(), input);
@@ -97,11 +99,13 @@ int main() {
 
                     *iter = input;
                 }
-
-                cout << "here are your Favorite Games!\n";
+                cout << "here are your Games!\n";
             for(int i = 0; i < favgames.size(); i++) {
                 cout << "   " <<favgames[i] <<"\n";
             }
+            }
+            else{
+                cout << "we couldn't find that name.\n";
             }
         }
 
