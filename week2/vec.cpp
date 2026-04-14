@@ -10,12 +10,20 @@ using namespace std;
 
 int main() {
     cout << "Lets learn Vectors!\n";
+    // make a globalish vector of favs
+    // we are able to see our changes through the loops
+    // auto varible type
+    //sorting with sort
+    //then start the homework
 
+    // this vector exists outside the do=while loop
+    // so it won't be destroyed every loop
+    vector<string> favgames = {"mario", "pacman", "Eldin Ring"};
     string input;
 
     do{
         cout << "what would you like to do?\n";
-        cout << "you can type 'quit', 'find', 'push'.\n";
+        cout << "you can type 'quit', 'remove', 'find', 'push'.\n";
 
         getline(cin, input);
 
@@ -94,6 +102,31 @@ int main() {
             }
             else{
                 cout << "we couldn't find that name.\n";
+            }
+        }
+        else if(input == "push") {
+        }
+        else if(input == "remove"){
+            sort(favgames.begin(), favgames.end());
+            cout << "here are your favorite games:\n";
+
+            for(int i = 0; i < favgames.size(); i++) {
+                 cout << favgames[i] << endl;
+            }
+        
+            cout << "What game would you like to remove from this list?\n";
+            getline(cin, input);
+
+            auto iter = find(favgames.begin(), favgames.end(), input);
+
+            if(iter != favgames.end()) {
+                cout << "We've found that name. removing now.\n";
+                favgames.erase(iter);
+            }
+             cout << "here are your favorite games:\n";
+
+            for(int i = 0; i < favgames.size(); i++) {
+                 cout << favgames[i] << endl;
             }
         }
         else if(input == "quit") {
