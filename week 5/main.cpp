@@ -53,6 +53,7 @@ public:
 
     }
 
+    //getters
     string getName() {
         return name;
     }
