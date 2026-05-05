@@ -3,136 +3,114 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 #include <ctime>
 #include <cstdlib>
-#include <algorithm>
+#include <vector>
 
 using namespace std;
 
-// this is a global vector, visable
-vector<string> names = {"Alfred", "Barbara", "Quentin", "Sandra", "Glenn", "Betty"};
+// can we build a vector of slimes?
+// can we get the slimes to fight each other?
+// can we build boss slimes?
+
+// global vector of names, any function can use this.
+vector<string> slimeNames = {"Tombow", "Cheryl", "Escobar", "Inigo", "Franz"};
 
 class baseSlime {
-    public:
-    string name = "";
-    int health = 0;
-    int damage = 0;
+public:
+    string name;
+    int health;
+    int damage;
 
-    int startingHealth = 0;
-
-    // defualt constructor
+    // default constructor
     baseSlime() {
-        cout << "A new slime has been found.\n";
-        name = names[rand() % names.size()] + " slime";
-        health = rand() % 4 + 4;
-        startingHealth = health;
-        damage = rand() % 3 + 3;
+        // get a random name between 0 and 
+        name = slimeNames[rand() % slimeNames.size()] + " Slime";
+        health = rand() % 5 + 5;
+        damage = rand() % 6 + 3;
     }
 
     void hello() {
-        cout << "I'm " << name << ", with " << health << " health ";
-        cout << "and " << damage << " damage.\n";
+        cout << "My name is " << name << ".\nI have " << health;
+        cout << " health and " << damage << " damage.\n";
     }
 
-    // attack another slime
-    void attack(baseSlime& opponent) {
-        opponent.health -= damage;
-        cout << name << " has done " << damage << " damage to ";
-        cout << opponent.name << "!\n";
-    }
-
-};
-
-class bossSlime : public baseSlime {
-    public:
-    int damageMultiplier = 3;
-
-    // constructor for boss
-    // this runs after the baseSlime constructor muts
-    bossSlime() {
-        // should inherit health
-        // should inherit the cout statement
-        name = "boss";
-        damage = damage * damageMultiplier;
-    }
-
-    // attack another slime
     bool attack(baseSlime& opponent) {
-        cout << "this is a boss attack!\n";
         opponent.health -= damage;
-        cout << name << " has done " << damage << " damage to ";
-        cout << opponent.name << "!\n";
+        cout << name << " attacks " << opponent.name << "!\n";
 
-        if(opponent.health <= 0)  return true;
-        else                return false;      
+        // did this attack defeat the opponent?
+        if(opponent.health <= 0) {
+            return true;
         }
-
-    void taunt() {
-        cout << "I will crush your bones with my slime!\n";
-    
+        else {
+            return false;
+        }
     }
+
+    // step 1 = who attacks first?
+    // step 2 = fighter A attacks fighter B
+    // step 3 = (if fighterB is still alive) fighter b attacks fighter A
+
+
 };
 
 int main() {
-    srand(time(0));     // seed the random number
-    cout << "Slime Bettles\n";
+    srand(time(0)); 
+    cout << "Let's make some slimes fight!\n";
 
-    //create a slime
-    baseSlime gerald;
-    gerald.name = "Gerald";
-    gerald.hello();
+    baseSlime ricky;
+    ricky.name = "Richard Slime";
+    ricky.health = 10;
+    ricky.damage = 4;
 
-    bossSlime destroyer;
-    destroyer.name = "destroyer";
-    destroyer.hello();
-    destroyer.taunt();
+    baseSlime beth;
+    beth.name = "Elizabeth Slime";
+    beth.health = 7;
+    beth.damage = 6;
 
-    cout << "Gerald is feeling cheeky...\n";
-    gerald.attack(destroyer);
+    ricky.hello();
+    beth.hello();
 
-    cout << "Destroyer is enraged!\n";
-    if(destroyer.attack(gerald)) {
-        cout << "Gerald is no more. DED.\n";
+    cout << "Creating our glob of slimes...\n\n";
+    vector<baseSlime> glob(6);
+
+    for(int i = 0; i < glob.size(); i++) {
+        glob[i].hello();
+        cout << "\n\n";
     }
 
-    // create a vector of slimes
-    // than pick two to fight
-    // global varibles
+    cout << "Let's have ricky and beth fight.\n";
 
-    // create a new vector of slime with a size of 6
-    vector<baseSlime> sludge(6);
 
-    if(true) {
-        bossSlime superSlime;
-        sludge.push_back(superSlime);
+    baseSlime temp, temp2;
+    baseSlime& fighterA = temp;
+    baseSlime& fighterB = temp2;
+
+    if(rand() % 2 == 0) {
+        cout << "Ricky goes first!\n";
+        fighterA = ricky;
+        fighterB = beth;
+    }
+    else {
+        cout << "Beth goes first!\n";
+        fighterA = beth;
+        fighterB = ricky;
     }
 
-    for(auto& slime : sludge) {
-        cout << slime.name << "\n";
-    }
-
-
-    random_shuffle(sludge.begin, sludge.end());
-
-    auto& a = sludge[0];    // a is equal to the second slime
-    auto& b = sludge[1];    // b is equal to the second slime
-
-    cout << a.name << " is fighting " << b.name << "!!!\n\n";
-
-    while(a.health > 0 && b.health > 0) {
-        if(a.attack(b)) {
-            cout << b.name << " has been defeated by ";
-            cout << a.name << ".\n";
+    // the thunderdome
+    while(fighterA.health > 0 && fighterB.health > 0) {
+        // fighterA punches
+        if(fighterA.attack(fighterB))  {
+            cout << fighterB.name << " has been defeated!\n";
         }
         else {
-            if(b.attack(a)) {
-                cout << a.name << " has been defeated by ";
-                cout << b.name << ".\n";
+            // fighterB punches
+            if(fighterB.attack(fighterA)) {
+                cout << fighterA.name << " has been defeated!\n";
             }
         }
     }
-
 
     return 0;
 }
