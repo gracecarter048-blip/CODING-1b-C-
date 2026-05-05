@@ -1,5 +1,5 @@
 // Carter Grace Coding 1 Final
-// Making  the bones of a tamagotchi 
+// Making  the bones of a Poke'mon tamagotchi 
 
 #include <iostream>
 #include <string>
@@ -19,7 +19,6 @@ void read(string path = "Final.txt") {
             cout << line << endl;
         }
     }
-  
      //after we are done with file we close it
     readFile.close();
 
@@ -59,30 +58,40 @@ void write(vector<string>& vec, string path = "Final.txt") {
 int main() {
     cout << "Let's Begin Your Pokemon Training!\n";
     vector<string> favs;
-    string input;
+    string userInput;
 
     string path = "Final.txt";
     cout << "Would you like to open your pokedex?\n";
 
     // get players anwser
-     getline(cin, input);
-     if(input != "yes") {
-        path = input;
+     getline(cin, userInput);
+     if(userInput != "yes") {
+        path = userInput;
     }
 
     read();     //show current names
     read(favs); // add the names to the vector
 
-    for(int i = 0; i < final.size(); i++) {
-                 cout << "\t" << final[i] << endl;
-    }
-        
-    cout << "What Pokemon would you like to train to be the best?\n";
-    getline(cin, input);
-            // use the find algorithm
-    Final.push_back(input);
-   
-     
+    do{
+         cout << "Would you like to add a pokemon to your list?"
+         " if yes type 'yes', if not type 'no'.\n";
+        getline(cin, userInput);
+        if(userInput == "yes") {
+
+            cout << "Lets add a New Pokemon.\n";
+            //get players feedback
+            getline(cin, userInput);
+            cout << "here are your pokemon:\n";
+            break;
+        }
+         if(userInput == "no") {
+            cout << "What Pokemon would you like to train to be the best?\n";
+            cin >> userInput;
+            cout << "You chose: " << userInput << endl;
+        }
+        break;
+    } while(true);
+
 
     return 0;
 }
