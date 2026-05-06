@@ -165,47 +165,51 @@ int main() {
             }
             if(userInput == "battle") {
                 cout << "Let's battle some pokemon!\n";
-                starterPokemon Charizard;
-                Charizard.name = "Charizard";
-                Charizard.health = 10;
-                Charizard.damage = 4;
+                cout << "You will battle Charizard, his attack is 4, and health is at 10.\n";
+                cout << "Would you like to attack or run away?\n";
+                if(userInput == "attack") {
+                     starterPokemon Charizard;
+                    Charizard.name = "Charizard";
+                    Charizard.health = 10;
+                    Charizard.damage = 4;
 
-                starterPokemon yourPokemon;
-                yourPokemon.name = "yourPokemon";
-                yourPokemon.health = 7;
-                yourPokemon.damage = 6;
+                    starterPokemon yourPokemon;
+                    yourPokemon.name = "yourPokemon";
+                    yourPokemon.health = 7;
+                    yourPokemon.damage = 6;
 
-                Charizard.hello();
-                yourPokemon.hello();
+                    Charizard.hello();
+                    yourPokemon.hello();
 
-                cout << "Let's start the pokemon battle.\n";
+                    cout << "Let's start the pokemon battle.\n";
 
 
-                starterPokemon& fighterA = (rand() % 2 == 0) ? Charizard : yourPokemon;
-                starterPokemon& fighterB = (fighterA.name == Charizard.name) ? yourPokemon : Charizard;
+                    starterPokemon& fighterA = (rand() % 2 == 0) ? Charizard : yourPokemon;
+                    starterPokemon& fighterB = (fighterA.name == Charizard.name) ? yourPokemon : Charizard;
 
-                if(rand() % 2 == 0) {
-                    cout << "Charizard blasts first!\n";
-                    fighterA = Charizard;
-                    fighterB = yourPokemon;
-                }
-                else {
-                    cout << "You blast first!\n";
-                    fighterA = yourPokemon;
-                    fighterB = Charizard;
-                }
-                while(fighterA.health > 0 && fighterB.health > 0) {
-                    // fighterA punches
-                    if(fighterA.attack(fighterB))  {
-                        cout << fighterB.name << " has been defeated!\n";
+                    if(rand() % 2 == 0) {
+                        cout << "Charizard blasts first!\n";
+                        fighterA = Charizard;
+                        fighterB = yourPokemon;
                     }
                     else {
-                        // fighterB punches
-                        if(fighterB.attack(fighterA)) {
-                            cout << fighterA.name << " has been defeated!\n";
+                        cout << "You blast first!\n";
+                        fighterA = yourPokemon;
+                        fighterB = Charizard;
+                    }
+                    while(fighterA.health > 0 && fighterB.health > 0) {
+                        // fighterA punches
+                        if(fighterA.attack(fighterB))  {
+                            cout << fighterB.name << " has been defeated!\n";
+                        }
+                        else {
+                            // fighterB punches
+                            if(fighterB.attack(fighterA)) {
+                                cout << fighterA.name << " has been defeated!\n";
+                            }
                         }
                     }
-                }
+                }   
             }
         break;
         } 
