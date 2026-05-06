@@ -60,18 +60,19 @@ void read(string path = "Final.txt") {
 }
 
 void read(vector<string>& vec, string path = "Final.txt") {
-     string line;
-    ifstream readFile("final.txt");      //input file on stream
-    if(readFile.is_open()) {
+    string line;
+    ifstream readFile(path); // input file on stream
+    if (readFile.is_open()) {
         cout << "Pokedex open.\n";
-        while(getline(readFile, line)) {
+        while (getline(readFile, line)) {
             vec.push_back(line);
         }
-    }
-    else {
+        if (vec.empty()) {
+            cout << "The Pokedex is empty. Please add Pokémon first.\n";
+        }
+    } else {
         cout << "Couldn't open that file.\n";
     }
-     //after we are done with file we close it
     readFile.close();
 }
 
@@ -105,17 +106,14 @@ int main() {
         path = userInput;
     }
 
-    read();     //show current names
-    read(Final); // add the names to the vector
-
     do{
         cout << "Would you like to 'add' a pokemon, or 'select' a pokemon for battle?\n";
-          getline(cin, userInput);
+        getline(cin, userInput);
 
-         if(userInput == "add") {
+        if(userInput == "add") {
             //ask player what they want to add
-              for(int i = 0; i < Final.size(); i++) {
-                 cout << "\t" << Final[i] << endl;
+            for(int i = 0; i < Final.size(); i++) {
+                cout << "\t" << Final[i] << endl;
             }
             cout << "Lets add a new pokemon to collection.\n";
             //get players feedback
@@ -125,13 +123,11 @@ int main() {
 
             cout << "here is your collection:\n";
             for(int i = 0; i < Final.size(); i++) {
-                 cout << "\t" << Final[i] << endl;
-            }
-            
+                cout << "\t" << Final[i] << endl;
+            }   
         }
 
         else if(userInput == "select") {
-            read();     //show current names
             read(Final); // add the names to the vector
             vector<string>::iterator iter;
             cout << "here are your Pokemon!\n";
@@ -145,70 +141,74 @@ int main() {
             getline(cin, userInput);
             // use the find algorithm
             iter = find(Final.begin(), Final.end(), userInput);
-            if(iter != Final.end()) {
-                cout << " " << *iter << " has 2 Hunger, 1 Damage, 4 Battle.\n";
-                cout << " Would you like to 'feed' him, 'train' him, or 'battle' with him?\n";
+            if(iter != Final.end()) 
+            cout << " " << *iter << " Has 2 Hunger bars, 2 Attack bars, 4 Health.\n";
+        }
+        do {
+            cout << " Would you like to 'feed' him, 'train' him, or 'battle' with him?\n";
+            getline(cin, userInput);
+            if(userInput == "feed") {
+                cout << "You have feed him, he is now full!\n";
+                cout << "he is now ready to train or battle with you!\n";
+            }
+            if(userInput == "train") {
+                cout << "You both will now train, to be the very best!\n";
+                cout << "Would you like to add to your attack or health?\n";
                 getline(cin, userInput);
-                if(userInput == "feed") {
-                    cout << "You have feed him, he is now full!\n";
-                    cout << "he is now ready to train or battle with you!\n";
+                if(userInput == "attack") {
+                    cout << "Attack has raised to 5 bars.\n";
                 }
-                if(userInput == "train") {
-                    cout << "You both will now train, to be the very best!\n";
-                    cout << "he is now ready to battle with you!\n";
+                if(userInput == "health") {
+                    cout << "Health has been raised to 6 bars, he now can take serious evolved pokemon blats.\n";
                 }
-                if(userInput == "battle") {
-                    cout << "Let's battle some pokemon!\n";
-                     starterPokemon ricky;
-                    ricky.name = "Richard Slime";
-                    ricky.health = 10;
-                    ricky.damage = 4;
+                cout << "he is now ready to battle with you!\n";
+            }
+            if(userInput == "battle") {
+                cout << "Let's battle some pokemon!\n";
+                starterPokemon Charizard;
+                Charizard.name = "Charizard";
+                Charizard.health = 10;
+                Charizard.damage = 4;
 
-                    starterPokemon beth;
-                    beth.name = "Elizabeth Slime";
-                    beth.health = 7;
-                    beth.damage = 6;
+                starterPokemon yourPokemon;
+                yourPokemon.name = "yourPokemon";
+                yourPokemon.health = 7;
+                yourPokemon.damage = 6;
 
-                    ricky.hello();
-                    beth.hello();
+                Charizard.hello();
+                yourPokemon.hello();
 
-                    cout << "Let's have ricky and beth fight.\n";
+                cout << "Let's start the pokemon battle.\n";
 
 
-                    starterPokemon temp, temp2;
-                    starterPokemon& fighterA = temp;
-                    starterPokemon& fighterB = temp2;
+                starterPokemon& fighterA = (rand() % 2 == 0) ? Charizard : yourPokemon;
+                starterPokemon& fighterB = (fighterA.name == Charizard.name) ? yourPokemon : Charizard;
 
-                    if(rand() % 2 == 0) {
-                         cout << "Ricky goes first!\n";
-                         fighterA = ricky;
-                        fighterB = beth;
+                if(rand() % 2 == 0) {
+                    cout << "Charizard blasts first!\n";
+                    fighterA = Charizard;
+                    fighterB = yourPokemon;
+                }
+                else {
+                    cout << "You blast first!\n";
+                    fighterA = yourPokemon;
+                    fighterB = Charizard;
+                }
+                while(fighterA.health > 0 && fighterB.health > 0) {
+                    // fighterA punches
+                    if(fighterA.attack(fighterB))  {
+                        cout << fighterB.name << " has been defeated!\n";
                     }
                     else {
-                        cout << "Beth goes first!\n";
-                        fighterA = beth;
-                        fighterB = ricky;
-                    }
-                    while(fighterA.health > 0 && fighterB.health > 0) {
-                        // fighterA punches
-                        if(fighterA.attack(fighterB))  {
-                            cout << fighterB.name << " has been defeated!\n";
-                        }
-                        else {
-                            // fighterB punches
-                            if(fighterB.attack(fighterA)) {
-                                 cout << fighterA.name << " has been defeated!\n";
-                            }
+                        // fighterB punches
+                        if(fighterB.attack(fighterA)) {
+                            cout << fighterA.name << " has been defeated!\n";
                         }
                     }
                 }
-
             }
-            else{   //if wrong game gets put in take player back to menu
-                cout << "we couldn't find that name.\n";
-                break;
-            }
-        }
+        break;
+        } 
 
     } while(true);
 
