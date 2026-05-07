@@ -20,7 +20,6 @@ public:
 
     // default constructor
     starterPokemon() {
-        // get a random name between 0 and 5
         name = FinalNames[rand() % FinalNames.size()] + " ";
         health = rand() % 5 + 5;
         damage = rand() % 6 + 3;
@@ -40,62 +39,51 @@ public:
         else {return false;}
     }
 };
-
-
-
+// reads Final.txt file, telling user all their pokemon
 void read(vector<string>& vec, string path = "Final.txt") {
     string line;
     ifstream readFile(path); // input file on stream
     if (readFile.is_open()) {
         cout << "Pokedex open.\n";
         while (getline(readFile, line)) {vec.push_back(line);}
-    } 
+    } // if the wrong file gets typed, tell player file can't be found
     else { cout << "Couldn't open that file.\n";}
     readFile.close();
 }
-
-
 
 int main() {
     cout << "Let's Begin Your Pokemon Training!\n";
     vector<string> Final;
     string userInput;
     
-    string path = "Final.txt";
+    string path = "Final.txt"; // telling the computer what file we want
     cout << "Would you like to open your pokedex?\n";
     // get players anwser
     getline(cin, userInput);
-    if(userInput != "yes") {path = userInput;}
+    if(userInput == "yes") {path = userInput;
     read(Final);
-
-    cout << "Would you like to 'add' a pokemon, or 'select' a pokemon for battle?\n";
+    cout << "Would you like to 'add' a pokemon, or 'select' a pokemon for battle?\n";}
     
     getline(cin, userInput);
-    // name a critter
+    // name a pokemon into the list
     if(userInput == "add") {
         //ask player what they want to add
-        for(int i = 0; i < Final.size(); i++) {
-            cout << "\t" << Final[i] << endl;
-        }
+        for(int i = 0; i < Final.size(); i++) {cout << "\t" << Final[i] << endl;}
         cout << "Lets add a new pokemon to collection.\n";
         //get players feedback
         getline(cin, userInput);
         //show player the new list
         Final.push_back(userInput);
-
         cout << "here is your collection:\n";
-        for(int i = 0; i < Final.size(); i++) {
-            cout << "\t" << Final[i] << endl;
-        }   
+        for(int i = 0; i < Final.size(); i++) {cout << "\t" << Final[i] << endl;}   
     }
 
     if(userInput == "select") {
         read(Final); // add the names to the vector
         vector<string>::iterator iter;
-        cout << "here are your Pokemon!\n";
+        cout << "here are your Pokemon!\n";         //show user their collection
         for(int i = 0; i < Final.size(); i++) {
-            cout << "   " <<Final[i] <<"\n";
-        }
+            cout << "   " <<Final[i] <<"\n";}
         iter = Final.begin();
         iter += 1;
         cout << "What pokemon would you like to select?\n";
@@ -105,15 +93,15 @@ int main() {
         // this is if players anwser is found
         if(iter != Final.end()){cout << "We have found that name!\n";}
         // this is if players anwser can not be found
-        else{ cout << "we couldn't find that name.\n";}
+        else{ cout << "We couldn't find that name.\n";}
         cout << " " << *iter << " Has 2 Hunger bars, 2 Attack bars, 4 Health.\n";
     }
-    do{
+    do{ //give player the option to feed, train or battle with their pokemon
         cout << " Would you like to 'feed' him, 'train' him, or 'battle' with him?\n";
         getline(cin, userInput);
-        if(userInput == "feed") {
+        if(userInput == "feed") {   //give player verbal feedback for feeding their pokemon
             cout << "You have feed him, he is now full!\n";
-            cout << "he is now ready to train or battle with you!\n";
+            cout << "He is now ready to train or battle with you!\n";
         } 
         else if(userInput == "train") {
             cout << "You both will now train, to be the very best!\n";
@@ -141,7 +129,7 @@ int main() {
             if(userInput == "attack") {
                 srand(time(0)); 
                 starterPokemon Charizard;
-                Charizard.name = "Charizard";
+                Charizard.name = "your Pokemon";
                 Charizard.health = 10;
                 Charizard.damage = 4;
 
@@ -156,7 +144,7 @@ int main() {
                 cout << "Let's start the pokemon battle.\n";
 
                 starterPokemon& fighterA = (rand() % 2 == 0) ? Charizard : yourPokemon;
-                starterPokemon& fighterB = (fighterA.name == Charizard.name) ? yourPokemon : Charizard;
+                starterPokemon& fighterB = (fighterA.name == yourPokemon.name) ? yourPokemon : Charizard;
 
                 if(rand() % 2 == 0) {
                     cout << "Charizard blasts first!\n";
