@@ -20,12 +20,12 @@ public:
 
     // default constructor
     starterPokemon() {
-        // get a random name between 0 and 
+        // get a random name between 0 and 5
         name = FinalNames[rand() % FinalNames.size()] + " ";
         health = rand() % 5 + 5;
         damage = rand() % 6 + 3;
     }
-
+    // tell the player the stats of the pokemon
     void hello() {
         cout << "My name is " << name << ".\nI have " << health;
         cout << " health and " << damage << " damage.\n";
@@ -36,12 +36,8 @@ public:
         cout << name << " attacks " << opponent.name << "!\n";
 
         // did this attack defeat the opponent?
-        if(opponent.health <= 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        if(opponent.health <= 0) {return true;}
+        else {return false;}
     }
 };
 
@@ -50,9 +46,7 @@ void read(string path = "Final.txt") {
     string line;
     ifstream readFile("Final.txt");      //input file on stream
     if(readFile.is_open()) {
-        while(getline(readFile, line)) {
-            cout << line << endl;
-        }
+        while(getline(readFile, line)) {cout << line << endl;}
     }
      //after we are done with file we close it
     readFile.close();
@@ -64,15 +58,9 @@ void read(vector<string>& vec, string path = "Final.txt") {
     ifstream readFile(path); // input file on stream
     if (readFile.is_open()) {
         cout << "Pokedex open.\n";
-        while (getline(readFile, line)) {
-            vec.push_back(line);
-        }
-        if (vec.empty()) {
-            cout << "The Pokedex is empty. Please add Pokémon first.\n";
-        }
-    } else {
-        cout << "Couldn't open that file.\n";
-    }
+        while (getline(readFile, line)) {vec.push_back(line);}
+    } 
+    else { cout << "Couldn't open that file.\n";}
     readFile.close();
 }
 
@@ -84,9 +72,7 @@ void write(vector<string>& vec, string path = "Final.txt") {
             writeFile << vec[i] << endl;
         }
     }
-     else {
-        cout << "couldn't open new writeFile.\n";
-    }
+     else {cout << "couldn't open new writeFile.\n";}
      
      writeFile.close();
 }
@@ -157,11 +143,9 @@ int main() {
             cout << "Would you like to add to your attack or health?\n";
             getline(cin, userInput);
             if(userInput == "attack") {
-                cout << "Attack has raised to 5 bars.\n";
-            }
+                cout << "Attack has raised to 5 bars.\n";}
             if(userInput == "health") {
-                cout << "Health has been raised to 6 bars, he now can take serious evolved pokemon blats.\n";
-            }
+                cout << "Health has been raised to 6 bars, he now can take serious evolved pokemon blats.\n";}
             cout << "he is now ready to battle with you!\n";
         } 
    
@@ -191,7 +175,6 @@ int main() {
 
                 cout << "Let's start the pokemon battle.\n";
 
-
                 starterPokemon& fighterA = (rand() % 2 == 0) ? Charizard : yourPokemon;
                 starterPokemon& fighterB = (fighterA.name == Charizard.name) ? yourPokemon : Charizard;
 
@@ -208,13 +191,11 @@ int main() {
                 while(fighterA.health > 0 && fighterB.health > 0) {
                     // fighterA punches
                     if(fighterA.attack(fighterB))  {
-                        cout << fighterB.name << " has been defeated!\n";
-                    }
+                        cout << fighterB.name << " has been defeated!\n";}
                     else {
                         // fighterB punches
                         if(fighterB.attack(fighterA)) {
-                            cout << fighterA.name << " has been defeated!\n";
-                        }
+                            cout << fighterA.name << " has been defeated!\n";}
                     }
                 }
                 return 0;
