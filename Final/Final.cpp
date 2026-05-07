@@ -10,7 +10,7 @@
 
 using namespace std; 
 
-vector<string> FinalNames = {"Tombow", "Cheryl", "Escobar", "Inigo", "Franz"};
+vector<string> FinalNames = {"Ash", "Team Rocket", "Brock", "Misty", "Giovoni"};
 
 class starterPokemon {
 public:
