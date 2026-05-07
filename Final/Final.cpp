@@ -11,7 +11,6 @@
 using namespace std; 
 
 vector<string> FinalNames = {"Ash", "Team Rocket", "Brock", "Misty", "Giovoni"};
-
 class starterPokemon {
 public:
     string name;
