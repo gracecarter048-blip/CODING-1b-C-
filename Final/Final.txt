@@ -3,4 +3,5 @@ Bulbasour
 Psyduck
 Gengar
 Mimikyu
-Venusour
+Venusaur
+Voltorb
